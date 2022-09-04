@@ -14,12 +14,22 @@
             <li class='todoItem' data-id='<%=el._id%>'>
                 <span class='<%= el.completed === true ? 'completed' : 'not'%>'><%= el.todo %></span>
                 <span class="estimatedTime"><%= el.estimatedTimeToCompletion %></span>
+                <span class="actualTime">Actual time = <%= el.timeMarkedComplete - el.timeMarkedStarted %></span>
+
                 <!--<button class="start" type="button">
                     START
                 </button>
                 AW testing new format-->
-                <input type="button" value="Reset" id="sw-rst" disabled/>
-                <input type="button" value="Start" id="sw-go" disabled/>
+                <!-- <input type="button" value="Reset" id="sw-rst" disabled/>
+                <input type="button" value="Start" id="sw-go" disabled/> -->
+
+                <!-- <p><span id="seconds">00</span>:<span id="tens">00</span></p> -->
+                <div class="timerDisplay">
+                    00 : 00 : 00 : 000
+                 </div>
+                <button id="button-start">Start</button>
+                <button id="button-stop">Stop</button>
+                <button id="button-reset">Reset</button>
 
                 <!-- <span class="start">Start Todo</span> -->
                 <span class="del"> Delete </span>
