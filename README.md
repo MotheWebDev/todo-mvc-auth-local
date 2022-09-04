@@ -61,3 +61,6 @@ We are planning to add...
 4. Compute the delta between estimated completion time vs. actual completion time
   - alter the ejs to show this
   - alter the css if we want to change the display for the user
+
+Optimization/stretch goal
+- create a priority between the tasks

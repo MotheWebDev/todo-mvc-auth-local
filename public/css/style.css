@@ -14,7 +14,7 @@ h1{
     display: none;
 }
 
-button {
+/* button {
     -moz-border-radius: 5px;
     -webkit-border-radius: 5px;
     border-radius: 5px;
@@ -54,4 +54,4 @@ button:hover {
     justify-content: space-around;
     border-radius: 5px;
     box-shadow: 0 0 20px rgba(0,139,253,0.25);
-}
+} */

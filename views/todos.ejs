@@ -14,7 +14,7 @@
             <li class='todoItem' data-id='<%=el._id%>'>
                 <span class='<%= el.completed === true ? 'completed' : 'not'%>'><%= el.todo %></span>
                 <span class="estimatedTime"><%= el.estimatedTimeToCompletion %></span>
-                <span class="actualTime">Actual time = <%= el.timeMarkedComplete - el.timeMarkedStarted %></span>
+                <span class="actualTime">Actual time = <%= (el.timeMarkedComplete - el.timeMarkedStarted) / 1000 %></span>
 
                 <!--<button class="start" type="button">
                     START
@@ -27,7 +27,7 @@
                 <div class="timerDisplay">
                     00 : 00 : 00 : 000
                  </div>
-                <button id="button-start">Start</button>
+                <button class="start">Start</button>
                 <button id="button-stop">Stop</button>
                 <button id="button-reset">Reset</button>
 

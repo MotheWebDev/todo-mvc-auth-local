@@ -24,7 +24,7 @@ module.exports = {
     markComplete: async (req, res)=>{
         try{
             await Todo.findOneAndUpdate({_id:req.body.todoIdFromJSFile},{
-                completed: true, timeMarkedComplete: Date.now()
+                completed: true, timeMarkedComplete: req.body.completedTime
             })
             console.log('Marked Complete')
             res.json('Marked Complete')
@@ -57,7 +57,7 @@ module.exports = {
         console.log(req.body.todoIdFromJSFile)
         try{
             await Todo.findOneAndUpdate({_id:req.body.todoIdFromJSFile},{
-                timeMarkedStarted: Date.now()})
+                timeMarkedStarted: req.body.startTime})
             console.log('We started it!')
             res.json('We started it!')
         }catch(err){

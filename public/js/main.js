@@ -37,14 +37,31 @@ async function deleteTodo(){
     }
 }
 
+let [milliseconds,seconds,minutes,hours] = [0,0,0,0];
+let timerRef = document.querySelector('.timerDisplay');
+let init = null;
+
+// TODO: Output to the user the start time that is 0
+// send to database current time that is now
+// to the user we output the completed time
+function startUserTimer() {
+    if(init!==null){
+        clearInterval(init);
+    }
+    init = setInterval(displayTimer,10);
+}
 async function startTodo(){
     const todoId = this.parentNode.dataset.id
+    const initTime = Date.now();
+
+    // startUserTimer()
     try{
         const response = await fetch('todos/startTodo', {
             method: 'put',
             headers: {'Content-type': 'application/json'},
             body: JSON.stringify({
-                'todoIdFromJSFile': todoId
+                'todoIdFromJSFile': todoId,
+                'startTime': initTime,
             })
         })
         const data = await response.json()
@@ -57,12 +74,14 @@ async function startTodo(){
 
 async function markComplete(){
     const todoId = this.parentNode.dataset.id
+    const completed = Date.now()
     try{
         const response = await fetch('todos/markComplete', {
             method: 'put',
             headers: {'Content-type': 'application/json'},
             body: JSON.stringify({
-                'todoIdFromJSFile': todoId
+                'todoIdFromJSFile': todoId,
+                'completedTime': completed
             })
         })
         const data = await response.json()
@@ -91,26 +110,57 @@ async function markIncomplete(){
     }
 }
 
-let [milliseconds,seconds,minutes,hours] = [0,0,0,0];
-let timerRef = document.querySelector('.timerDisplay');
-let int = null;
+// const startBtn = document.querySelectorAll('.start')
 
-document.getElementById('button-start').addEventListener('click', ()=>{
-    if(int!==null){
-        clearInterval(int);
-    }
-    int = setInterval(displayTimer,10);
-});
+// Array.from(startBtn).forEach((el)=>{
+//     el.addEventListener('click', startTodo)
+// })
 
-document.getElementById('button-stop').addEventListener('click', ()=>{
-    clearInterval(int);
-});
+// let [milliseconds,seconds,minutes,hours] = [0,0,0,0];
+// let timerRef = document.querySelector('.timerDisplay');
+// let initTime = null;
 
-document.getElementById('button-reset').addEventListener('click', ()=>{
-    clearInterval(int);
-    [milliseconds,seconds,minutes,hours] = [0,0,0,0];
-    timerRef.innerHTML = '00 : 00 : 00 : 000 ';
-});
+// async function startTodo(){
+//     const todoId = this.parentNode.dataset.id
+//     if(initTime!==null){
+//         clearInterval(initTime);
+//     }
+//     // initTime = 0;
+//     console.log("HEREEEEEEEEEEEEEEEEEE", initTime);
+//     initTime = setInterval(displayTimer,10);
+//     try{
+//         const response = await fetch('todos/startTodo', {
+//             method: 'put',
+//             headers: {'Content-type': 'application/json'},
+//             body: JSON.stringify({
+//                 'todoIdFromJSFile': todoId,
+//                 'startTime': initTime,
+//             })
+//         })
+//         const data = await response.json()
+//         console.log(data)
+//         location.reload()
+//     }catch(err){
+//         console.log(err)
+//     }
+// }
+
+// document.getElementById('button-start').addEventListener('click', ()=>{
+//     if(initTime!==null){
+//         clearInterval(initTime);
+//     }
+//     initTime = setInterval(displayTimer,10);
+// });
+
+// document.getElementById('button-stop').addEventListener('click', ()=>{
+//     clearInterval(initTime);
+// });
+
+// document.getElementById('button-reset').addEventListener('click', ()=>{
+//     clearInterval(initTime);
+//     [milliseconds,seconds,minutes,hours] = [0,0,0,0];
+//     timerRef.innerHTML = '00 : 00 : 00 : 000 ';
+// });
 
 function displayTimer(){
     milliseconds+=10;
